@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express();
 
-// router.get("/", (req, res) => {
-//   res.status(200).json({ message: "global shopping mall" });
-// });
+const couponRouter = require("./couponRouter");
 
+router.use("/coupon", couponRouter);
 module.exports = router;
