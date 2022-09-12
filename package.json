@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx cross-env NODE_ENV=test mocha __test__/*.test.js",
+    "restart": "npx cross-env TEST_DATA=true nodemon server.js",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
