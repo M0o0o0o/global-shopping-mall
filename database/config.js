@@ -11,6 +11,7 @@ module.exports = {
     host: env.DB_HOST_DEVLOPMENT,
     dialect: "mysql",
     timezone: "+09:00",
+    logging: false,
   },
   test: {
     username: env.DB_USERNAME,
@@ -19,6 +20,7 @@ module.exports = {
     host: env.DB_HOST_TEST,
     dialect: "mysql",
     timezone: "+09:00",
+    logging: false,
   },
   production: {
     username: env.DB_USERNAME_PRODUCTION,
