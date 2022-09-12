@@ -4,21 +4,21 @@ module.exports = class Country extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        countryId: {
+        country_id: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true,
           allowNull: false,
         },
-        countryCode: {
+        country_code: {
           type: Sequelize.STRING(2),
           allowNull: false,
         },
-        countryDcode: {
+        country_dcode: {
           type: Sequelize.STRING(10),
           allowNull: false,
         },
-        countryName: {
+        country_name: {
           type: Sequelize.STRING(50),
           allowNull: false,
         },
@@ -26,7 +26,7 @@ module.exports = class Country extends Sequelize.Model {
       {
         sequelize,
         timestamps: false,
-        underscored: true,
+        underscored: false,
         modelName: "Country",
         tableName: "country",
         charset: "utf8mb4",

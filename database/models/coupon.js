@@ -4,17 +4,21 @@ module.exports = class Coupon extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        couponId: {
+        coupon_id: {
           type: Sequelize.UUID,
           defaultValue: Sequelize.UUIDV4,
           primaryKey: true,
+          allowNull: false,
+        },
+        content: {
+          type: Sequelize.STRING(200),
           allowNull: false,
         },
         amount: {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
-        couponCode: {
+        coupon_code: {
           type: Sequelize.UUID,
           allowNull: false,
         },
@@ -22,7 +26,7 @@ module.exports = class Coupon extends Sequelize.Model {
           type: Sequelize.INTEGER,
           defaultValue: 0,
         },
-        totalDiscount: {
+        total_discount: {
           type: Sequelize.DECIMAL(15, 2),
           defaultValue: 0,
         },
@@ -30,7 +34,7 @@ module.exports = class Coupon extends Sequelize.Model {
       {
         sequelize,
         timestamps: true,
-        underscored: true,
+        underscored: false,
         modelName: "Coupon",
         tableName: "coupon",
         paranoid: true,

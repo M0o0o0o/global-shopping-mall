@@ -4,7 +4,7 @@ module.exports = class CouponCategory extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        couponCategoryId: {
+        coupon_category_id: {
           type: Sequelize.UUID,
           defaultValue: Sequelize.UUIDV4,
           primaryKey: true,
@@ -15,17 +15,15 @@ module.exports = class CouponCategory extends Sequelize.Model {
           allowNull: true,
         },
         type: {
-          type: Sequelize.ENUM("ratio", "fix"),
+          // 0 : 배송비 할인, 1 : %할인, 정액 할인
+          type: Sequelize.TINYINT,
           allowNull: false,
-        },
-        target: {
-          type: Sequelize.ENUM("price", "delivery", "total"),
         },
       },
       {
         sequelize,
         timestamps: true,
-        underscored: true,
+        underscored: false,
         modelName: "CouponCategory",
         tableName: "coupon_category",
         paranoid: true,
