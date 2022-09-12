@@ -4,18 +4,18 @@ module.exports = class Order extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        orderId: {
+        order_id: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true,
           allowNull: false,
         },
-        payState: {
+        pay_state: {
           //0 : 결제 취소, 1 : 결제 완료
           type: Sequelize.TINYINT,
           allowNull: false,
         },
-        orderState: {
+        order_state: {
           //0: 배송 전, 1: 배송 중, 2: 배송 완료
           type: Sequelize.TINYINT,
           allowNull: false,
@@ -29,33 +29,33 @@ module.exports = class Order extends Sequelize.Model {
           type: Sequelize.DECIMAL(15, 2),
           allowNull: false,
         },
-        buyrCity: {
+        buyr_city: {
           type: Sequelize.STRING(50),
           allowNull: true,
         },
-        buyrCountry: {
+        buyr_country: {
           type: Sequelize.STRING(2),
           allowNull: false,
         },
-        buyrZip: {
+        buyr_zip: {
           type: Sequelize.STRING(40),
           allowNull: true,
         },
-        buyrName: {
+        buyr_name: {
           type: Sequelize.STRING(50),
           allowNull: true,
           defaultValue: null,
         },
-        deliveryNum: {
+        delivery_num: {
           type: Sequelize.STRING(50),
           allowNull: true,
         },
-        deliveryDate: {
+        delivery_date: {
           type: Sequelize.STRING(8),
           allowNull: true,
           defaultValue: null,
         },
-        orderDate: {
+        order_date: {
           type: Sequelize.STRING(8),
           allowNull: false,
         },
@@ -63,7 +63,7 @@ module.exports = class Order extends Sequelize.Model {
       {
         sequelize,
         timestamps: false,
-        underscored: true,
+        underscored: false,
         modelName: "Order",
         tableName: "orders",
         charset: "utf8mb4",

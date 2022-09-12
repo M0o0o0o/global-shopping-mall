@@ -14,7 +14,7 @@ const app = express();
 app.set("port", process.env.PORT);
 
 db.sequelize
-  .sync({ force: false })
+  .sync({ force: process.env.TEST_DATA ? true : false })
   .then(async () => {
     console.log("Synced database.");
     if (process.env.TEST_DATA) await testIndex();

@@ -8,4 +8,5 @@ module.exports = {
   EXCEEDLENGTH: (len) => `최대 ${len}자까지 입력해주세요.`,
   ONLYINT: "숫자만 입력해주세요",
   RETRY: "다시 시도해주세요",
+  NOTEXISTCATEGORY: "존재하지 않는 쿠폰 타입입니다.",
 };
