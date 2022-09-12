@@ -3,23 +3,25 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
-// const db = require("./database/models");
+const db = require("./database/models");
 const errorHandler = require("./middlewares/errorHandler");
 const routes = require("./routes");
 // const { swaggerUi, specs } = require("./swagger/swagger");
 const errorCodes = require("./codes/errorCodes");
+const testIndex = require("./testData");
 
 const app = express();
 app.set("port", process.env.PORT);
 
-// db.sequelize
-//   .sync({ force: false })
-//   .then(() => {
-//     console.log("Synced database.");
-//   })
-//   .catch((err) => {
-//     console.log("Failed to sync database: " + err.message);
-//   });
+db.sequelize
+  .sync({ force: false })
+  .then(async () => {
+    console.log("Synced database.");
+    if (process.env.TEST_DATA) await testIndex();
+  })
+  .catch((err) => {
+    console.log("Failed to sync database: " + err.message);
+  });
 
 app.use(cors());
 
