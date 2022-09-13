@@ -1,4 +1,4 @@
-const { body } = require("express-validator");
+const { body, query } = require("express-validator");
 const index = require("./index");
 const errorCodes = require("../codes/errorCodes");
 
@@ -56,6 +56,41 @@ function postOrder() {
   ];
 }
 
+function getOrders() {
+  return [
+    query("startDate")
+      .optional()
+      .isLength({ min: 8, max: 8 })
+      .bail()
+      .withMessage(errorCodes.EXCEEDLENGTH(8))
+      .isInt()
+      .withMessage(errorCodes.ONLYINT),
+    query("endDate")
+      .optional()
+      .isLength({ min: 8, max: 8 })
+      .bail()
+      .withMessage(errorCodes.EXCEEDLENGTH(8))
+      .isInt()
+      .withMessage(errorCodes.ONLYINT),
+    query("page")
+      .notEmpty()
+      .bail()
+      .withMessage(errorCodes.REQUIRED)
+      .isInt()
+      .withMessage(errorCodes.ONLYINT),
+    query("buyr_name")
+      .optional()
+      .isLength({ max: 50 })
+      .withMessage(errorCodes.EXCEEDLENGTH(50)),
+    query("order_state")
+      .optional()
+      .isIn(["0", "1", "2"])
+      .withMessage("유효한 주문 상태가 아닙니다."),
+    index,
+  ];
+}
+
 module.exports = {
   postOrder,
+  getOrders,
 };
