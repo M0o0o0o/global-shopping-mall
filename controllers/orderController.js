@@ -15,7 +15,6 @@ const addOrder = async (req, res, next) => {
     };
 
     const newOrder = await orderService.addOrder(data);
-
     res.location(`/order/${newOrder.order_id}`);
     return res.status(201).json({ message: "create new Order" });
   } catch (err) {

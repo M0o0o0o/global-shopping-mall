@@ -24,7 +24,7 @@ const getCoupon = async (coupon_id) => {
     count: coupon.count,
     total_discount: coupon.total_discount,
     create: coupon.createdAt,
-    coupon_type: coupon.CouponCategory.content,
+    type: coupon.CouponCategory.type,
   };
 };
 

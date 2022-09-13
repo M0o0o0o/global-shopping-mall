@@ -4,7 +4,8 @@ const {
   couponRepository,
   orderRepository,
 } = require("../repositories");
-const deliveryCost = require("../testData/delivery");
+const deliveryData = require("../testData/delivery");
+const applyCoupon = require("./applyCoupon");
 
 const getOrdersDao = require("../dao/getOrdersDao");
 
@@ -14,8 +15,8 @@ const addOrder = async (data) => {
   if (!country) {
     throw new Error("국가 코드를 다시 입력해주세요.");
   }
-
   data.fk_country_id = country.country_id;
+  const deliveryCost = deliveryData[data.quantity][country.country_name];
 
   // 쿠폰 확인
   if (data.coupon) {
@@ -23,10 +24,17 @@ const addOrder = async (data) => {
     if (!coupon) {
       throw new Error("존재하지 않는 쿠폰입니다.");
     }
-    // 계산 price 변경
+
+    const newPrice = await applyCoupon(
+      country.country_code,
+      coupon.CouponCategory.type,
+      coupon.amount,
+      data.price,
+      deliveryCost
+    );
+
+    data.price = newPrice;
     data.fk_coupon_id = coupon.coupon_id;
-    data.price =
-      data.price + deliveryCost[data.quantity][country.country_name] - 1000;
   }
 
   return await orderRepository.createOrder({
