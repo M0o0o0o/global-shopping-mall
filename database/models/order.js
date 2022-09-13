@@ -14,6 +14,7 @@ module.exports = class Order extends Sequelize.Model {
           //0 : 결제 취소, 1 : 결제 완료
           type: Sequelize.TINYINT,
           allowNull: false,
+          defaultValue: 1,
         },
         order_state: {
           //0: 배송 전, 1: 배송 중, 2: 배송 완료
