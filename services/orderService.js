@@ -1,11 +1,12 @@
 const moment = require("moment");
-const errorCodes = require("../codes/errorCodes");
 const {
   countryRepository,
   couponRepository,
   orderRepository,
 } = require("../repositories");
 const deliveryCost = require("../testData/delivery");
+
+const getOrdersDao = require("../dao/getOrdersDao");
 
 const addOrder = async (data) => {
   // 국가 확인
@@ -35,4 +36,18 @@ const addOrder = async (data) => {
   });
 };
 
-module.exports = { addOrder };
+const getOrders = async (data) => {
+  const whereClause = getOrdersDao(data);
+  const orders = await orderRepository.findOrders({
+    whereClause,
+    page: data.page,
+  });
+  return orders;
+};
+
+const getOrder = async (order_id) => {
+  const order = await orderRepository.findOrder(order_id);
+  return order;
+};
+
+module.exports = { addOrder, getOrders, getOrder };
