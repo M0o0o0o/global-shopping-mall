@@ -23,6 +23,18 @@ const findCoupon = async (coupon_id) => {
   }
 };
 
+const findCouponWithCode = async (coupon_code) => {
+  try {
+    return await Coupon.findOne({
+      where: { coupon_code },
+      include: [{ model: CouponCategory, required: true }],
+    });
+  } catch (err) {
+    logger.error(err);
+    return null;
+  }
+};
+
 const findCoupons = async (page) => {
   try {
     return await Coupon.findAll({
@@ -62,4 +74,5 @@ module.exports = {
   findCoupon,
   findCoupons,
   fundCouponsWithCategory,
+  findCouponWithCode,
 };

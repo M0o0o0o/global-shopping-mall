@@ -13,6 +13,7 @@ module.exports = class Country extends Sequelize.Model {
         country_code: {
           type: Sequelize.STRING(2),
           allowNull: false,
+          unique: true,
         },
         country_dcode: {
           type: Sequelize.STRING(10),

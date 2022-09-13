@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 function errorHandler(error, req, res, next) {
   console.log("\x1b[33m%s\x1b[0m", error.stack);
   const errorMessage = {

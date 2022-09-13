@@ -26,5 +26,6 @@
         "semi": true
       }
     ]
-  }
+  },
+  "eslint-disable": "no-useless-catch"
 }
