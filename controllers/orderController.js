@@ -1,6 +1,4 @@
-const { v4: uuidv4 } = require("uuid");
 const errorCodes = require("../codes/errorCodes");
-
 const { orderService } = require("../services");
 
 const addOrder = async (req, res, next) => {
@@ -25,4 +23,28 @@ const addOrder = async (req, res, next) => {
   }
 };
 
-module.exports = { addOrder };
+const getOrder = async (req, res, next) => {
+  try {
+    const order = await orderService.getOrder(req.params.id);
+
+    if (!order) {
+      res.status(404);
+      throw new Error(errorCodes.pageNotFound);
+    }
+
+    res.status(200).json(order);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getOrders = async (req, res, next) => {
+  try {
+    const orders = await orderService.getOrders(req.query);
+    res.status(200).json(orders);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { addOrder, getOrders, getOrder };
