@@ -5,7 +5,6 @@ const logger = require("../logger");
 
 /**
  * @Todo 송장번호
- *
  */
 const createCoupon = async (data) => {
   try {
