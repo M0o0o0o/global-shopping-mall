@@ -2,6 +2,11 @@ const Coupon = require("../database/models/coupon");
 const CouponCategory = require("../database/models/couponCategory");
 const sequelize = require("sequelize");
 const logger = require("../logger");
+
+/**
+ * @Todo 송장번호
+ *
+ */
 const createCoupon = async (data) => {
   try {
     return await Coupon.create(data);
