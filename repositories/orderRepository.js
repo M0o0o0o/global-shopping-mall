@@ -28,7 +28,6 @@ const findOrders = async ({ whereClause, page }) => {
       limit: 20,
     });
   } catch (err) {
-    console.log(err);
     logger.error(err);
     return [];
   }
