@@ -8,6 +8,7 @@ const deliveryData = require("../testData/delivery");
 const applyCoupon = require("./applyCoupon");
 
 const getOrdersDao = require("../dao/getOrdersDao");
+const errorCodes = require("../codes/errorCodes");
 
 const addOrder = async (data) => {
   // 국가 확인
@@ -58,4 +59,28 @@ const getOrder = async (order_id) => {
   return order;
 };
 
-module.exports = { addOrder, getOrders, getOrder };
+const setStartDelivery = async (order_id) => {
+  const cnt = await orderRepository.updateStartDelivery(order_id);
+  return cnt;
+};
+
+const deletedOrder = async (order_id) => {
+  const order = await getOrder(order_id);
+
+  if (!order) {
+    throw new Error("이미 결제 취소된 주문이거나 없는 주문입니다.");
+  }
+
+  if (order.order_state !== 0) {
+    throw new Error("이미 배송 중인 주문건이므로 결제취소가 불가능합니다.");
+  }
+  return await orderRepository.destroyOrder(order_id);
+};
+
+module.exports = {
+  addOrder,
+  getOrders,
+  getOrder,
+  setStartDelivery,
+  deletedOrder,
+};

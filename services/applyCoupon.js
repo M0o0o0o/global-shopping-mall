@@ -10,6 +10,7 @@ module.exports = async (
 ) => {
   console.log(couponAmount, productPrice, deliveryPrice);
   if (type === 0) {
+    // 배달비
     return await deliveryCoupon(
       country,
       couponAmount,
@@ -17,6 +18,7 @@ module.exports = async (
       deliveryPrice
     );
   } else if (type === 1) {
+    // 정률
     return await ratesCoupon(
       country,
       couponAmount,
@@ -24,6 +26,7 @@ module.exports = async (
       deliveryPrice
     );
   } else if (type === 2) {
+    //정액
     return await fixCoupon(country, couponAmount, productPrice, deliveryPrice);
   }
 };
