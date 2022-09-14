@@ -46,4 +46,37 @@ const getOrders = async (req, res, next) => {
   }
 };
 
-module.exports = { addOrder, getOrders, getOrder };
+const setStartDelivery = async (req, res, next) => {
+  try {
+    const order_id = req.params.id;
+    const order = await orderService.setStartDelivery(order_id);
+
+    console.log(order);
+    if (!order) {
+      res.status(400);
+      throw new Error("없는 주문 내역이거나 이미 발송 처리된 건입니다.");
+    }
+
+    res.status(200).end();
+  } catch (err) {
+    next(err);
+  }
+};
+
+const deleteOrder = async (req, res, next) => {
+  try {
+    const order_id = req.params.id;
+    await orderService.deletedOrder(order_id);
+    res.status(200).end();
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = {
+  addOrder,
+  getOrders,
+  getOrder,
+  setStartDelivery,
+  deleteOrder,
+};

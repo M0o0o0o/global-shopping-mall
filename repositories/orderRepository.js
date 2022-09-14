@@ -35,11 +35,49 @@ const findOrders = async ({ whereClause, page }) => {
 
 const findOrder = async (order_id) => {
   try {
-    return await Order.findOne({ where: { order_id } });
+    return await Order.findOne({ where: { order_id, pay_state: 1 } });
   } catch (err) {
     logger.error(err);
     return null;
   }
 };
 
-module.exports = { createOrder, findOrders, findOrder };
+const updateStartDelivery = async (order_id) => {
+  try {
+    return await Order.update(
+      {
+        order_state: 1,
+      },
+      {
+        where: { order_id, order_state: 0 },
+      }
+    );
+  } catch (err) {
+    logger.error(err);
+    return 0;
+  }
+};
+
+const destroyOrder = async (order_id) => {
+  try {
+    return await Order.update(
+      {
+        pay_state: 0,
+      },
+      {
+        where: { order_id },
+      }
+    );
+  } catch (err) {
+    logger.error(err);
+    return 0;
+  }
+};
+
+module.exports = {
+  createOrder,
+  findOrders,
+  findOrder,
+  updateStartDelivery,
+  destroyOrder,
+};
